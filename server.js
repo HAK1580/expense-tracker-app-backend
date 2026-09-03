@@ -2,14 +2,15 @@ const express=require('express');
 const app=express();
 const cors=require('cors')
 const mongoose=require('mongoose');
-const port=3000;
+const port=process.env.PORT || 3000;
 const expense=require('./models/expense')
+require('dotenv').config();
 
 app.use(express.json());
 app.use(cors());
 
 async function main(){
-    await mongoose.connect("mongodb://localhost:27017/expense_tracker_app");
+    await mongoose.connect(process.env.MONGO_URI);
 }
 main().catch(err=>console.log(err));
 
@@ -61,7 +62,7 @@ app.put('/api/expenses/:id',async (req,res)=>{
   }
 
 })
-
+console.log("Loaded Port from .env:", process.env.PORT);
 
 
 
