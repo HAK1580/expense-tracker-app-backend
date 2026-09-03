@@ -7,7 +7,14 @@ const expense=require('./models/expense')
 require('dotenv').config();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // Local Vite development
+    'http://localhost:3000', // Local CRA development
+    'https://expense-tracker-1580.netlify.app/' // Vercel/Netlify frontend URL (deploy karne ke baad)
+  ],
+  credentials: true
+}));
 
 async function main(){
     await mongoose.connect(process.env.MONGO_URI);
