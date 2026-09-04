@@ -9,13 +9,14 @@ require('dotenv').config();
 app.use(express.json());
 
 const corsOptions = {
-  origin: ['https://expense-tracker-1580.netlify.app' || 'http://localhost:5173'],
+  origin: ['https://expense-tracker-1580.netlify.app', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 };
-
 app.use(cors(corsOptions));
+
+
 async function main(){
     await mongoose.connect(process.env.MONGO_URI);
 }
